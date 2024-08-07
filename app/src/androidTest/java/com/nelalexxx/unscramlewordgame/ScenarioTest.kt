@@ -2,6 +2,7 @@ package com.nelalexxx.unscramlewordgame
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.nelalexxx.unscramlewordgame.game.GamePage
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -31,13 +32,13 @@ class ScenarioTest {
     fun caseNumber1() {
         gamePage.assertScrambleWordReceivedState()
 
-        gamePage.editInputField("example")
+        gamePage.editInputField(text = "example")
         gamePage.assertInputFieldEditedState()
 
         gamePage.clickCheck()
         gamePage.assertCorrectWordState()
 
-        gamePage.clickNext()
+        gamePage.clickGetNextWordButton()
         gamePage = GamePage(word = "xepleam" /*example*/)
         gamePage.assertScrambleWordReceivedState()
 
@@ -49,28 +50,28 @@ class ScenarioTest {
     fun caseNumber2() {
         gamePage.assertScrambleWordReceivedState()
 
-        gamePage.editInputField(word = "d")
+        gamePage.editInputField(text = "d")
         gamePage.assertInputFieldEditedState()
 
-        gamePage.editInputField(word = "e")
+        gamePage.editInputField(text = "e")
         gamePage.assertInputFieldEditedState()
 
-        gamePage.editInputField(word = "")
+        gamePage.editInputField(text = "")
         gamePage.assertScrambleWordReceivedState()
 
-        gamePage.editInputField(word = "educatoin")
+        gamePage.editInputField(text = "educatoin")
         gamePage.assertInputFieldEditedState()
 
         gamePage.clickCheck()
         gamePage.assertInCorrectWordState()
 
-        gamePage.editInputField(word = "education")
+        gamePage.editInputField(text = "education")
         gamePage.assertInputFieldEditedState()
 
         gamePage.clickCheck()
         gamePage.assertCorrectWordState()
 
-        gamePage.clickNext()
+        gamePage.clickGetNextWordButton()
         gamePage = GamePage(word = "xepleam" /*example*/)
         gamePage.assertScrambleWordReceivedState()
     }
@@ -81,24 +82,24 @@ class ScenarioTest {
     fun caseNumber3() {
         gamePage.assertScrambleWordReceivedState()
 
-        gamePage.clickSkip()
+        gamePage.clickGetNextWordButton()
         gamePage = GamePage(word = "etts" /*test*/)
         gamePage.assertScrambleWordReceivedState()
 
-        gamePage.editInputField("ttes")
+        gamePage.editInputField(text = "ttes")
         gamePage.assertInputFieldEditedState()
 
-        gamePage.clickSkip()
+        gamePage.clickGetNextWordButton()
         gamePage = GamePage(word = "ricytov" /*victory*/)
         gamePage.assertScrambleWordReceivedState()
 
-        gamePage.editInputField("vyctori")
+        gamePage.editInputField(text = "vyctori")
         gamePage.assertInputFieldEditedState()
 
         gamePage.clickCheck()
         gamePage.assertInCorrectWordState()
 
-        gamePage.clickSkip()
+        gamePage.clickGetNextWordButton()
         gamePage = GamePage(word = "den" /*end*/)
         gamePage.assertScrambleWordReceivedState()
     }

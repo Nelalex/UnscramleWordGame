@@ -1,0 +1,96 @@
+package com.nelalexxx.unscramlewordgame.game
+
+import android.view.View
+import android.widget.LinearLayout
+import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withParent
+import org.hamcrest.Matcher
+
+class GamePage(word: String) {
+
+    private val containerIdMatcher: Matcher<View> = withParent(withId(R.id.rootLayout))
+    private val classTypeMatcher: Matcher<View> =
+        withParent(isAssignableFrom(LinearLayout::class.java))
+
+    private val wordUi = WordUi(
+        text = word,
+        containerIdMatcher = containerIdMatcher,
+        containerClassTypeMatcher = classTypeMatcher
+    )
+
+
+    private val inputFieldUi = InputFieldUi (
+            containerIdMatcher = containerIdMatcher,
+            containerClassTypeMatcher = classTypeMatcher
+        )
+
+
+    private val checkButtonUi = ButtonUi(
+        id = R.id.checkButton,
+        textResId = R.string.checkButtonText,
+        colorHex = R.color.checkButtonColor,
+        containerIdMatcher = containerIdMatcher,
+        containerClassTypeMatcher = classTypeMatcher
+    )
+
+    private val getNextWordButtonUi = ButtonUi(
+        id = R.id.getNextWordButton,
+        textResId = R.string.skip, // skip - next
+        colorHex =  R.color.getNextWordButtonColor,
+        containerIdMatcher = containerIdMatcher,
+        containerClassTypeMatcher = classTypeMatcher
+    )
+
+
+    fun editInputField(text: String) {
+        inputFieldUi.addInput(text = text)
+    }
+
+    fun clickCheck() {
+        checkButtonUi.click()
+    }
+
+    fun clickGetNextWordButton() {
+        getNextWordButtonUi.click()
+    }
+
+
+    fun assertScrambleWordReceivedState() {
+        wordUi.assertTextVisible()
+        inputFieldUi.assertScrambleWordReceivedState()
+        checkButtonUi.assertVisibleState()
+        checkButtonUi.assertDisabledState()
+        getNextWordButtonUi.assertScrambleWordReceivedState()
+    }
+
+
+
+    fun assertInputFieldEditedState() {
+        wordUi.assertTextVisible()
+        inputFieldUi.assertInputFieldEditedState()
+        checkButtonUi.assertVisibleState()
+        checkButtonUi.assertEnabledState()
+        getNextWordButtonUi.assertInputFieldEditedState()
+    }
+
+
+
+    fun assertCorrectWordState() {
+        wordUi.assertTextVisible()
+        inputFieldUi.assertCorrectWordState()
+        checkButtonUi.assertInvisibleState()
+        getNextWordButtonUi.assertCorrectWordState()
+    }
+
+
+
+    fun assertInCorrectWordState() {
+        wordUi.assertTextVisible()
+        inputFieldUi.assertInCorrectWordState()
+        checkButtonUi.assertVisibleWordState()
+        checkButtonUi.assertDisabledWordState()
+        getNextWordButtonUi.assertInCorrectWordState()
+    }
+
+}
