@@ -5,6 +5,7 @@ import android.widget.LinearLayout
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withParent
+import com.nelalexxx.unscramlewordgame.R
 import org.hamcrest.Matcher
 
 class GamePage(word: String) {
@@ -20,7 +21,8 @@ class GamePage(word: String) {
     )
 
 
-    private val inputFieldUi = InputFieldUi (
+    private val inputField = InputField(
+        id = R.id.inputFieldLayout,
             containerIdMatcher = containerIdMatcher,
             containerClassTypeMatcher = classTypeMatcher
         )
@@ -29,7 +31,7 @@ class GamePage(word: String) {
     private val checkButtonUi = ButtonUi(
         id = R.id.checkButton,
         textResId = R.string.checkButtonText,
-        colorHex = R.color.checkButtonColor,
+        color = R.color.checkButtonColor,
         containerIdMatcher = containerIdMatcher,
         containerClassTypeMatcher = classTypeMatcher
     )
@@ -37,14 +39,14 @@ class GamePage(word: String) {
     private val getNextWordButtonUi = ButtonUi(
         id = R.id.getNextWordButton,
         textResId = R.string.skip, // skip - next
-        colorHex =  R.color.getNextWordButtonColor,
+        color = R.color.skipButtonColor,
         containerIdMatcher = containerIdMatcher,
         containerClassTypeMatcher = classTypeMatcher
     )
 
 
     fun editInputField(text: String) {
-        inputFieldUi.addInput(text = text)
+        inputField.onTextChange(text = text)
     }
 
     fun clickCheck() {
@@ -58,7 +60,7 @@ class GamePage(word: String) {
 
     fun assertScrambleWordReceivedState() {
         wordUi.assertTextVisible()
-        inputFieldUi.assertScrambleWordReceivedState()
+        inputField.assertScrambleWordReceivedState()
         checkButtonUi.assertVisibleState()
         checkButtonUi.assertDisabledState()
         getNextWordButtonUi.assertScrambleWordReceivedState()
@@ -68,7 +70,7 @@ class GamePage(word: String) {
 
     fun assertInputFieldEditedState() {
         wordUi.assertTextVisible()
-        inputFieldUi.assertInputFieldEditedState()
+        inputField.assertInputFieldEditedState()
         checkButtonUi.assertVisibleState()
         checkButtonUi.assertEnabledState()
         getNextWordButtonUi.assertInputFieldEditedState()
@@ -78,7 +80,7 @@ class GamePage(word: String) {
 
     fun assertCorrectWordState() {
         wordUi.assertTextVisible()
-        inputFieldUi.assertCorrectWordState()
+        inputField.assertCorrectWordState()
         checkButtonUi.assertInvisibleState()
         getNextWordButtonUi.assertCorrectWordState()
     }
@@ -87,9 +89,9 @@ class GamePage(word: String) {
 
     fun assertInCorrectWordState() {
         wordUi.assertTextVisible()
-        inputFieldUi.assertInCorrectWordState()
-        checkButtonUi.assertVisibleWordState()
-        checkButtonUi.assertDisabledWordState()
+        inputField.assertInCorrectWordState()
+        checkButtonUi.assertVisibleState()
+        checkButtonUi.assertDisabledState()
         getNextWordButtonUi.assertInCorrectWordState()
     }
 

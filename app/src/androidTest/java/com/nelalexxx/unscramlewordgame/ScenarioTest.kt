@@ -3,13 +3,10 @@ package com.nelalexxx.unscramlewordgame
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nelalexxx.unscramlewordgame.game.GamePage
-
-import org.junit.Test
-import org.junit.runner.RunWith
-
-import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
 
 
 @RunWith(AndroidJUnit4::class)
@@ -103,6 +100,15 @@ class ScenarioTest {
         gamePage = GamePage(word = "den" /*end*/)
         gamePage.assertScrambleWordReceivedState()
     }
+
+    /*
+    @Test
+    fun caseNumber5() {
+        gamePage.editInputField(text = "spasibo")
+        gamePage.editInputField(text = "-2")
+
+    }
+    */
 
 
 }
