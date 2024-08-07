@@ -1,37 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:id="@+id/rootLayout"
-        android:layout_width="370dp"
-        android:layout_height="468dp"
-        android:layout_marginStart="16dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello World!" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"></Space>
 
         <TextView
             android:id="@+id/wordTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"></Space>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputFieldLayout"
             android:layout_width="match_parent"
+            android:padding="10dp"
             android:layout_height="wrap_content"
             android:visibility="visible">
 
@@ -39,26 +35,35 @@
                 android:id="@+id/inputFieldEditText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="hint"
+                android:hint="Type text here!"
                 android:visibility="visible" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"></Space>
         <Button
             android:id="@+id/checkButton"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button"
+            android:gravity="center"
+            android:text="@string/checkButtonText"
             android:visibility="visible" />
 
         <Button
             android:id="@+id/getNextWordButton"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Button"
+            android:text="@string/next"
             android:visibility="visible" />
 
-    </LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"></Space>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
