@@ -15,7 +15,7 @@ class GameViewModelTest {
 
     @Before
     fun setup() {
-        viewModel = GameViewModel()
+        viewModel = GameViewModel(repository = FakeRepository())
     }
 
     /*
@@ -203,6 +203,30 @@ class GameViewModelTest {
     }
 }
 
+
+private class FakeRepository : GameRepository {
+
+    private val originalList = listOf(
+        "123",
+        "345",
+        "789",
+        "024"
+    )
+    private val shuffledList = originalList.map { it.reversed() }
+
+
+    private var index = 0
+    override fun shuffledWord(): String = shuffledList[index]
+
+    override fun same(userInput: String): Boolean =
+        originalList[index].equals(userInput, true)
+
+    override fun next() {
+        index++
+        if (index == originalList.size)
+            index = 0
+    }
+}
 
 
 
