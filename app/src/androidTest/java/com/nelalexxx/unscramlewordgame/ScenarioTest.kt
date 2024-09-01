@@ -17,9 +17,14 @@ class ScenarioTest {
 
     private  lateinit var gamePage: GamePage
 
+    //    "hello",
+//    "spam",
+//    "report",
+//    "stop",
+//    "troll"
     @Before
     fun setup() {
-        gamePage = GamePage(word = "ionucedat") // education
+        gamePage = GamePage(word = "hello".reversed()) // education
     }
 
     /** UGTC-01
@@ -36,7 +41,7 @@ class ScenarioTest {
         gamePage.assertCorrectWordState()
 
         gamePage.clickGetNextWordButton()
-        gamePage = GamePage(word = "xepleam" /*example*/)
+        gamePage = GamePage(word = "spam".reversed() /*example*/)
         gamePage.assertScrambleWordReceivedState()
 
     }
@@ -56,20 +61,20 @@ class ScenarioTest {
         gamePage.editInputField(text = "")
         gamePage.assertScrambleWordReceivedState()
 
-        gamePage.editInputField(text = "educatoin")
+        gamePage.editInputField(text = "spam".reversed())
         gamePage.assertInputFieldEditedState()
 
         gamePage.clickCheck()
         gamePage.assertInCorrectWordState()
 
-        gamePage.editInputField(text = "education")
+        gamePage.editInputField(text = "report".reversed())
         gamePage.assertInputFieldEditedState()
 
         gamePage.clickCheck()
         gamePage.assertCorrectWordState()
 
         gamePage.clickGetNextWordButton()
-        gamePage = GamePage(word = "xepleam" /*example*/)
+        gamePage = GamePage(word = "stop".reversed() /*example*/)
         gamePage.assertScrambleWordReceivedState()
     }
 

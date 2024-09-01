@@ -1,6 +1,6 @@
 package com.nelalexxx.unscramlewordgame
 
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
@@ -57,28 +57,22 @@ class GameViewModelTest {
         var actual: GameUiState = viewModel.init()
         var expected: GameUiState = GameUiState.ScrambleWordReceived(
             text = "123".reversed(),
-            inputFieldText = ""
         )
         assertEquals(expected, actual)
 
         actual = viewModel.editInputField(text = "123")
         expected = GameUiState.ScrambleWordReceived(
             text = "123".reversed(),
-            inputFieldText = "123"
         )
         assertEquals(expected, actual)
 
-        actual = viewModel.check()
-        expected = GameUiState.CorrectWord(
-            text = "123".reversed(),
-            inputFieldText = "123"
-        )
+        actual = viewModel.check("123")
+        expected = GameUiState.CorrectWord()
         assertEquals(expected, actual)
 
         actual = viewModel.nextWord()
         expected = GameUiState.ScrambleWordReceived(
             text = "345".reversed(),
-            inputFieldText = ""
         )
         assertEquals(expected, actual)
     }
@@ -88,116 +82,71 @@ class GameViewModelTest {
         var actual: GameUiState = viewModel.init()
         var expected: GameUiState = GameUiState.ScrambleWordReceived(
             text = "123".reversed(),
-            inputFieldText = ""
         )
         assertEquals(expected, actual)
 
         actual = viewModel.editInputField(text = "3")
-        expected = GameUiState.ScrambleWordReceived(
-            text = "123".reversed(),
-            inputFieldText = "3"
-        )
+        expected = GameUiState.TextEdited()
         assertEquals(expected, actual)
 
         actual = viewModel.editInputField(text = "32")
-        expected = GameUiState.ScrambleWordReceived(
-            text = "123".reversed(),
-            inputFieldText = "32"
-        )
+        expected = GameUiState.TextEdited()
         assertEquals(expected, actual)
 
         actual = viewModel.editInputField(text = "")
-        expected = GameUiState.ScrambleWordReceived(
-            text = "123".reversed(),
-            inputFieldText = ""
-        )
+        expected = GameUiState.TextEdited()
         assertEquals(expected, actual)
 
         actual = viewModel.editInputField(text = "321")
-        expected = GameUiState.ScrambleWordReceived(
-            text = "123".reversed(),
-            inputFieldText = "321"
-        )
+        expected = GameUiState.TextEdited()
         assertEquals(expected, actual)
 
-        actual = viewModel.check()
-        expected = GameUiState.InCorrectWord(
-            text = "123".reversed(),
-            inputFieldText = "321"
-        )
+        actual = viewModel.check("222")
+        expected = GameUiState.InCorrectWord()
         assertEquals(expected, actual)
 
         actual = viewModel.editInputField(text = "123")
-        expected = GameUiState.ScrambleWordReceived(
-            text = "123".reversed(),
-            inputFieldText = "123"
-        )
+        expected = GameUiState.TextEdited()
         assertEquals(expected, actual)
 
-        actual = viewModel.check()
-        expected = GameUiState.CorrectWord(
-            text = "123".reversed(),
-            inputFieldText = "123"
-        )
+        actual = viewModel.check("123")
+        expected = GameUiState.CorrectWord()
         assertEquals(expected, actual)
 
         actual = viewModel.nextWord()
-        expected = GameUiState.ScrambleWordReceived(
-            text = "345".reversed(),
-            inputFieldText = ""
-        )
+        expected = GameUiState.ScrambleWordReceived("642".reversed())
         assertEquals(expected, actual)
     }
 
     @Test
     fun caseNumber3() {
         var actual: GameUiState = viewModel.init()
-        var expected: GameUiState = GameUiState.ScrambleWordReceived(
-            text = "123".reversed(),
-            inputFieldText = ""
-        )
+        var expected: GameUiState = GameUiState.ScrambleWordReceived(text = "123".reversed())
         assertEquals(expected, actual)
 
         actual = viewModel.nextWord()
-        expected = GameUiState.ScrambleWordReceived(
-            text = "345".reversed(),
-            inputFieldText = ""
-        )
+
+        expected = GameUiState.ScrambleWordReceived("345".reversed())
         assertEquals(expected, actual)
 
         actual = viewModel.editInputField(text = "333")
-        expected = GameUiState.ScrambleWordReceived(
-            text = "345".reversed(),
-            inputFieldText = "333"
-        )
+        expected = GameUiState.TextEdited()
         assertEquals(expected, actual)
 
         actual = viewModel.nextWord()
-        expected = GameUiState.ScrambleWordReceived(
-            text = "789".reversed(),
-            inputFieldText = ""
-        )
+        expected = GameUiState.ScrambleWordReceived(text = "789".reversed())
         assertEquals(expected, actual)
 
         actual = viewModel.editInputField(text = "788")
-        expected = GameUiState.ScrambleWordReceived(
-            text = "789".reversed(),
-            inputFieldText = "788"
-        )
+        expected = GameUiState.TextEdited()
         assertEquals(expected, actual)
 
-        actual = viewModel.check()
-        expected = GameUiState.InCorrectWord(
-            text = "789".reversed(),
-            inputFieldText = "788"
-        )
+        actual = viewModel.check(text = "788")
+        expected = GameUiState.InCorrectWord()
         assertEquals(expected, actual)
 
         actual = viewModel.nextWord()
-        expected = GameUiState.ScrambleWordReceived(
-            text = "024".reversed(),
-            inputFieldText = ""
-        )
+        expected = GameUiState.ScrambleWordReceived(text = "024".reversed())
         assertEquals(expected, actual)
 
     }
@@ -217,8 +166,11 @@ private class FakeRepository : GameRepository {
 
     private var index = 0
     override fun shuffledWord(): String = shuffledList[index]
+    override fun same(): Boolean {
+        return false
+    }
 
-    override fun same(userInput: String): Boolean =
+    fun same(userInput: String): Boolean =
         originalList[index].equals(userInput, true)
 
     override fun next() {

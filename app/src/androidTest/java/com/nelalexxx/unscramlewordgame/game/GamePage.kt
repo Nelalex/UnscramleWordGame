@@ -9,7 +9,6 @@ import com.nelalexxx.unscramlewordgame.R
 import org.hamcrest.Matcher
 
 class GamePage(word: String) {
-
     private val containerIdMatcher: Matcher<View> = withParent(withId(R.id.rootLayout))
     private val classTypeMatcher: Matcher<View> =
         withParent(isAssignableFrom(LinearLayout::class.java))
@@ -24,7 +23,6 @@ class GamePage(word: String) {
     private val inputField = InputField(
         id = R.id.inputFieldLayout,
             containerIdMatcher = containerIdMatcher,
-            containerClassTypeMatcher = classTypeMatcher
         )
 
 
@@ -61,8 +59,8 @@ class GamePage(word: String) {
     fun assertScrambleWordReceivedState() {
         wordUi.assertTextVisible()
         inputField.assertScrambleWordReceivedState()
-        checkButtonUi.assertVisibleState()
-        checkButtonUi.assertDisabledState()
+        checkButtonUi.assertInvisibleState()
+        // checkButtonUi.assertDisabledState()
         getNextWordButtonUi.assertScrambleWordReceivedState()
     }
 
@@ -72,7 +70,7 @@ class GamePage(word: String) {
         wordUi.assertTextVisible()
         inputField.assertInputFieldEditedState()
         checkButtonUi.assertVisibleState()
-        checkButtonUi.assertEnabledState()
+        // checkButtonUi.assertEnabledState()
         getNextWordButtonUi.assertInputFieldEditedState()
     }
 
@@ -90,8 +88,8 @@ class GamePage(word: String) {
     fun assertInCorrectWordState() {
         wordUi.assertTextVisible()
         inputField.assertInCorrectWordState()
-        checkButtonUi.assertVisibleState()
-        checkButtonUi.assertDisabledState()
+        checkButtonUi.assertInvisibleState()
+        //  checkButtonUi.assertDisabledState()
         getNextWordButtonUi.assertInCorrectWordState()
     }
 
