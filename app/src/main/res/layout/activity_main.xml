@@ -10,9 +10,9 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"></Space>
+        android:layout_weight="1" />
 
-        <TextView
+    <com.nelalexxx.unscramlewordgame.views.word.WordTextView
             android:id="@+id/wordTextView"
             android:layout_width="match_parent"
             android:gravity="center"
@@ -22,7 +22,7 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"></Space>
+        android:layout_weight="1" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputFieldLayout"
@@ -31,11 +31,12 @@
             android:layout_height="wrap_content"
             android:visibility="visible">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.nelalexxx.unscramlewordgame.views.editText.CustomEditText
                 android:id="@+id/inputFieldEditText"
                 android:layout_width="match_parent"
+                android:hint="@string/hint"
                 android:layout_height="match_parent"
-                android:hint="Type text here!"
+                android:singleLine="true"
                 android:visibility="visible" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -43,8 +44,9 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"></Space>
-        <Button
+        android:layout_weight="1" />
+
+    <com.nelalexxx.unscramlewordgame.views.button.VisibilityButton
             android:id="@+id/checkButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,18 +54,18 @@
             android:text="@string/checkButtonText"
             android:visibility="visible" />
 
-        <Button
+    <com.nelalexxx.unscramlewordgame.views.button.VisibilityButton
             android:id="@+id/getNextWordButton"
             android:layout_width="match_parent"
             android:gravity="center"
             android:layout_height="wrap_content"
-            android:text="@string/next"
+        android:text="@string/skip"
             android:visibility="visible" />
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"></Space>
+        android:layout_weight="1" />
 
 
 </LinearLayout>

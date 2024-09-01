@@ -11,10 +11,8 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.espresso.matcher.ViewMatchers.isEnabled
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withParent
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import com.nelalexxx.unscramlewordgame.R
 import org.hamcrest.CoreMatchers.allOf
 import org.hamcrest.CoreMatchers.not
@@ -22,25 +20,19 @@ import org.hamcrest.Matcher
 
 class InputField(
     id: Int,
-    containerClassTypeMatcher: Matcher<View>,
     containerIdMatcher: Matcher<View>
 ) {
 
     private val layoutInteraction: ViewInteraction = onView(
         allOf(
             containerIdMatcher,
-            containerClassTypeMatcher,
-            withId(R.id.inputFieldLayout),
-            isAssignableFrom(TextInputLayout::class.java)
+            withId(R.id.inputFieldLayout)
         )
     )
 
     private val inputInteraction: ViewInteraction = onView(
         allOf(
-            withId(R.id.inputFieldEditText),
-            isAssignableFrom(TextInputEditText::class.java),
-            withParent(withId(R.id.inputFieldLayout)),
-            withParent(isAssignableFrom(TextInputLayout::class.java))
+            withId(R.id.inputFieldEditText)
         )
     )
 
