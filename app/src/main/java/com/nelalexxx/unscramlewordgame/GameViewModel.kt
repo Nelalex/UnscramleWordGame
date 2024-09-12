@@ -1,18 +1,22 @@
 package com.nelalexxx.unscramlewordgame
 
+// Основной класс для работы с данными
 class GameViewModel(private val repository: GameRepository) {
 
-    //
+    // функция срабатывает при нажатии кнопки check
+    // получает на вход строку(из EditText) и в зависимости от значения
+    // выбирает какое преобразование с экраном выполнить
     fun check(text: String): GameUiState {
 
         val data = repository.shuffledWord()
         if (text == data.reversed()) {
-            return GameUiState.CorrectWord()
+            return GameUiState.CorrectWord
         } else {
-            return GameUiState.InCorrectWord()
+            return GameUiState.InCorrectWord
         }
     }
 
+    // функция получает на вход
     fun goNextWord(): GameUiState {
         repository.next()
         return init()
@@ -25,11 +29,10 @@ class GameViewModel(private val repository: GameRepository) {
 
     //
     fun editInputField(text: String): GameUiState {
-        if (text == "") {
-            val data = repository.shuffledWord()
-            return GameUiState.TextEdited(-1)
+        return if (text == "") {
+            GameUiState.TextEdited(-1)
         } else
-            return GameUiState.TextEdited()
+            GameUiState.TextEdited()
     }
 
     fun nextWord(): GameUiState {

@@ -3,9 +3,8 @@ package com.nelalexxx.unscramlewordgame.views.editText
 import android.content.Context
 import android.util.AttributeSet
 import com.google.android.material.textfield.TextInputEditText
-import com.nelalexxx.unscramlewordgame.views.word.UpdateText
 
-class CustomEditText : TextInputEditText, UpdateText {
+class CustomEditText : TextInputEditText, UpdateEditText {
 
     constructor(context: Context)
             : super(context)
@@ -16,9 +15,22 @@ class CustomEditText : TextInputEditText, UpdateText {
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int)
             : super(context, attrs, defStyleAttr)
 
-    override fun update(text: String) {
+    override fun update(enabled: Boolean, text: String) {
+        this.isEnabled = enabled
         this.setText(text)
+
     }
+
+    override fun update(enabled: Boolean) {
+        this.isEnabled = enabled
+    }
+
+}
+
+interface UpdateEditText {
+
+    fun update(enabled: Boolean, text: String)
+    fun update(enabled: Boolean)
 
 }
 

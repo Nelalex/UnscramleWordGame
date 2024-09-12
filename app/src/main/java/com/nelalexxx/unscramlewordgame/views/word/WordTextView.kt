@@ -18,11 +18,9 @@ class WordTextView : androidx.appcompat.widget.AppCompatTextView, UpdateText {
         this.text = text
     }
 
-    override fun getFreezesText() = true
 
 }
 
 interface UpdateText {
-
     fun update(text: String)
 }

@@ -4,4 +4,6 @@
     <string name="checkButtonText">check</string>
     <string name="next">next</string>
     <string name="hint">Type text here!</string>
+    <string name="correct">Correct!</string>
+    <string name="incorrect">Incorrect!</string>
 </resources>

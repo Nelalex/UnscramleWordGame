@@ -1,11 +1,8 @@
 package com.nelalexxx.unscramlewordgame
 
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -14,12 +11,12 @@ import com.nelalexxx.unscramlewordgame.databinding.ActivityMainBinding
 
 
 private lateinit var uiState: GameUiState
-
+private lateinit var binding: ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.rootLayout)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -27,17 +24,12 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+
         val viewModel: GameViewModel = (application as ScrumbleWordApp).viewModel
 
 
-        fun update() {
-            uiState.update(
-                binding.wordTextView,
-                binding.inputFieldEditText,
-                binding.checkButton,
-                binding.getNextWordButton
-            )
-        }
+
+
         uiState = viewModel.init(savedInstanceState == null)
         update()
 
@@ -52,13 +44,6 @@ class MainActivity : AppCompatActivity() {
             update()
         }
 
-        binding.rootLayout.setOnClickListener {
-            val view: View? = this.currentFocus
-            if (view != binding.inputFieldEditText) {
-                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(binding.inputFieldEditText.windowToken, 0)
-            }
-        }
 
 
 
@@ -83,5 +68,20 @@ class MainActivity : AppCompatActivity() {
         outState.putSerializable("uiState", uiState)
     }
 
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        uiState = savedInstanceState.getSerializable("uiState") as GameUiState
+        update()
+    }
 
+
+    fun update() {
+        uiState.update(
+            binding.wordTextView,
+            binding.inputFieldEditText,
+            binding.inputFieldLayout,
+            binding.checkButton,
+            binding.getNextWordButton
+        )
+    }
 }

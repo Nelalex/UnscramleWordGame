@@ -5,7 +5,6 @@ import android.content.Context
 
 class ScrumbleWordApp : Application() {
 
-
     lateinit var viewModel: GameViewModel
     override fun onCreate() {
         super.onCreate()

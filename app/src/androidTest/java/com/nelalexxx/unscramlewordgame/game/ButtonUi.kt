@@ -59,13 +59,13 @@ class ButtonUi(
 
     fun assertCorrectWordState() {
         interaction
-            .check(matches(ButtonColorMatcher(R.color.nextButtonColor)))
+            .check(matches(ButtonColorMatcher(R.color.Correct)))
             .check(matches(withText(R.string.next)))
     }
 
     fun assertInputFieldEditedState() {
         interaction
-            .check(matches(ButtonColorMatcher(R.color.nextButtonColor)))
+            .check(matches(ButtonColorMatcher(R.color.Correct)))
             .check(matches(withText(R.string.skip)))
     }
 
