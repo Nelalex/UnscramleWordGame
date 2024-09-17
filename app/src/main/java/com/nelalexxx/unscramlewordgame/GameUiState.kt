@@ -127,5 +127,4 @@ interface GameUiState : Serializable {
     }
 
 
-
 }

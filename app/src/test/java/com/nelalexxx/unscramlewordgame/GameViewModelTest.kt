@@ -67,7 +67,7 @@ class GameViewModelTest {
         assertEquals(expected, actual)
 
         actual = viewModel.check("123")
-        expected = GameUiState.CorrectWord()
+        expected = GameUiState.CorrectWord
         assertEquals(expected, actual)
 
         actual = viewModel.nextWord()
@@ -102,7 +102,7 @@ class GameViewModelTest {
         assertEquals(expected, actual)
 
         actual = viewModel.check("222")
-        expected = GameUiState.InCorrectWord()
+        expected = GameUiState.InCorrectWord
         assertEquals(expected, actual)
 
         actual = viewModel.editInputField(text = "123")
@@ -110,7 +110,7 @@ class GameViewModelTest {
         assertEquals(expected, actual)
 
         actual = viewModel.check("123")
-        expected = GameUiState.CorrectWord()
+        expected = GameUiState.CorrectWord
         assertEquals(expected, actual)
 
         actual = viewModel.nextWord()
@@ -142,7 +142,7 @@ class GameViewModelTest {
         assertEquals(expected, actual)
 
         actual = viewModel.check(text = "788")
-        expected = GameUiState.InCorrectWord()
+        expected = GameUiState.InCorrectWord
         assertEquals(expected, actual)
 
         actual = viewModel.nextWord()
