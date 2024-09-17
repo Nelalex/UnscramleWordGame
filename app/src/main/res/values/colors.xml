@@ -3,6 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="skipButtonColor">#2986BA</color>
-    <color name="nextButtonColor">#03A51D</color>
+    <color name="Correct">#4EEC67</color>
     <color name="checkButtonColor">#2997BA</color>
+    <color name="Incorrect">#F3564B</color>
 </resources>
