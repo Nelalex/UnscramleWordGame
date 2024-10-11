@@ -1,4 +1,4 @@
-package com.nelalexxx.unscramlewordgame
+package com.nelalexxx.unscramlewordgame.data.cache
 
 import android.content.SharedPreferences
 

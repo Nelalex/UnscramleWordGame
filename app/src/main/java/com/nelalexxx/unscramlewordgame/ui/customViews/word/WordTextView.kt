@@ -1,4 +1,4 @@
-package com.nelalexxx.unscramlewordgame.views.word
+package com.nelalexxx.unscramlewordgame.ui.customViews.word
 
 import android.content.Context
 import android.util.AttributeSet
