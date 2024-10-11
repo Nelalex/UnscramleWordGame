@@ -1,15 +1,15 @@
-package com.nelalexxx.unscramlewordgame.views.button
+package com.nelalexxx.unscramlewordgame.ui.customViews.button
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getString
+import com.google.android.material.button.MaterialButton
 import com.nelalexxx.unscramlewordgame.R
 
 
-class CustomButton : AppCompatButton, UpdateButton {
+class CustomButton : MaterialButton, UpdateButton {
 
 //    private var savedText: Int = 0
 //    private var savedVisibility: Int = View.VISIBLE

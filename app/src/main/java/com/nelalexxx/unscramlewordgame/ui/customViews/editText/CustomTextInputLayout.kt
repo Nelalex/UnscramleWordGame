@@ -1,4 +1,4 @@
-package com.nelalexxx.unscramlewordgame.views.editText
+package com.nelalexxx.unscramlewordgame.ui.customViews.editText
 
 import android.content.Context
 import android.os.Bundle

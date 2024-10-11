@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/gameFragmentLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#6D92A1"
+    android:orientation="vertical"
+    tools:context=".ui.activities.MainActivity">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+    <com.nelalexxx.unscramlewordgame.ui.customViews.word.WordTextView
+        android:id="@+id/wordTextView"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/textview_border"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="Тест текста"
+        android:textColor="@color/black"
+        android:textSize="18dp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <com.nelalexxx.unscramlewordgame.ui.customViews.editText.CustomTextInputLayout
+        android:id="@+id/inputFieldLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:textColorHint="#989898"
+        android:visibility="visible"
+        app:cornerRadius="8dp">
+
+        <com.nelalexxx.unscramlewordgame.ui.customViews.editText.CustomEditText
+            android:id="@+id/inputFieldEditText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#E0EBF1"
+            android:hint="@string/hint"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:visibility="visible" />
+
+    </com.nelalexxx.unscramlewordgame.ui.customViews.editText.CustomTextInputLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <com.nelalexxx.unscramlewordgame.ui.customViews.button.CustomButton
+        android:id="@+id/checkButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:backgroundTint="#355B67"
+        android:elevation="4dp"
+        android:gravity="center"
+        android:text="@string/checkButtonText"
+        android:textColor="@color/white"
+        app:cornerRadius="8dp" />
+
+    <com.nelalexxx.unscramlewordgame.ui.customViews.button.CustomButton
+        android:id="@+id/getNextWordButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:elevation="4dp"
+        android:gravity="center"
+        android:text="@string/skip"
+        android:textColor="@color/white"
+        app:cornerRadius="8dp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+
+</LinearLayout>

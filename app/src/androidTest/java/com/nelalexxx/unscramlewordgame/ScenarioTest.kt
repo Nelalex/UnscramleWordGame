@@ -3,6 +3,7 @@ package com.nelalexxx.unscramlewordgame
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nelalexxx.unscramlewordgame.game.GamePage
+import com.nelalexxx.unscramlewordgame.ui.activities.MainActivity
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

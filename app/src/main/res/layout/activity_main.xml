@@ -1,76 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".ui.activities.MainActivity">
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+ <TextView
+     android:layout_width="match_parent"
+     android:layout_height="80dp"
+     android:background="#E0EBF1"
+     android:gravity="center"
+     android:padding="20dp"
+     android:text="Unscramble word game"
+     android:textSize="24dp"
+     android:textStyle="bold" />
 
-    <com.nelalexxx.unscramlewordgame.views.word.WordTextView
-        android:id="@+id/wordTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="" />
+ <androidx.fragment.app.FragmentContainerView
+     android:id="@+id/main_nav_host_fragment"
+     android:name="androidx.navigation.fragment.NavHostFragment"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     app:defaultNavHost="true"
+     app:navGraph="@navigation/main_nav_grph" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <com.nelalexxx.unscramlewordgame.views.editText.CustomTextInputLayout
-        android:id="@+id/inputFieldLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:visibility="visible">
-
-        <com.nelalexxx.unscramlewordgame.views.editText.CustomEditText
-            android:id="@+id/inputFieldEditText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/hint"
-            android:singleLine="true"
-            android:visibility="visible" />
-
-    </com.nelalexxx.unscramlewordgame.views.editText.CustomTextInputLayout>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <com.nelalexxx.unscramlewordgame.views.button.CustomButton
-        android:id="@+id/checkButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:backgroundTint="@color/checkButtonColor"
-        android:gravity="center"
-        android:text="@string/checkButtonText" />
-
-    <com.nelalexxx.unscramlewordgame.views.button.CustomButton
-        android:id="@+id/getNextWordButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:gravity="center"
-        android:text="@string/skip" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
 
 
 </LinearLayout>
