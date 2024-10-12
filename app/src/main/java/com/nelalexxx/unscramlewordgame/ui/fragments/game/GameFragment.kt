@@ -10,7 +10,6 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.nelalexxx.unscramlewordgame.R
-import com.nelalexxx.unscramlewordgame.data.viewmodels.GameUiState
 import com.nelalexxx.unscramlewordgame.data.viewmodels.GameViewModel
 import com.nelalexxx.unscramlewordgame.databinding.GameFragmentLayoutBinding
 import com.nelalexxx.unscramlewordgame.ui.fragments.BindingFragment
@@ -19,20 +18,22 @@ class GameFragment : BindingFragment<GameFragmentLayoutBinding>() {
     override val bindingInflater: (LayoutInflater) -> ViewBinding
         get() = GameFragmentLayoutBinding::inflate
     private val viewModel: GameViewModel by activityViewModels()
+    lateinit var uiState: GameUiState
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.init()
-        update()
+        uiState = GameUiState.ScrambleWordReceived(viewModel.init())
+        updateUI()
+
         binding.checkButton.setOnClickListener {
-            viewModel.uiState = viewModel.check(binding.inputFieldEditText.text.toString())
-            update()
+            uiState = viewModel.check(binding.inputFieldEditText.text.toString())
+            updateUI()
         }
 
         binding.getNextWordButton.setOnClickListener {
-            viewModel.uiState = viewModel.goNextWord()
-            if (viewModel.uiState == GameUiState.Empty) {
+            uiState = viewModel.goNextWord()
+            if (uiState == GameUiState.Empty) {
                 findNavController().navigate(
                     R.id.statsFragment,
                     null,
@@ -41,9 +42,8 @@ class GameFragment : BindingFragment<GameFragmentLayoutBinding>() {
                         .build()
                 )
             }
-            update()
+            updateUI()
         }
-
 
         binding.inputFieldEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -53,21 +53,32 @@ class GameFragment : BindingFragment<GameFragmentLayoutBinding>() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                viewModel.uiState =
-                    viewModel.editInputField(binding.inputFieldEditText.text.toString())
-                update()
+                uiState = viewModel.editInputField(binding.inputFieldEditText.text.toString())
+                updateUI()
             }
         })
     }
 
-    fun update() {
-        viewModel.uiState.update(
+    fun updateUI() {
+        uiState.update(
             binding.wordTextView,
             binding.inputFieldEditText,
             binding.inputFieldLayout,
             binding.checkButton,
             binding.getNextWordButton
         )
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putSerializable("uiState", uiState)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        uiState = savedInstanceState?.getSerializable("uiState") as? GameUiState
+            ?: GameUiState.Empty
+        updateUI()
     }
 }
 

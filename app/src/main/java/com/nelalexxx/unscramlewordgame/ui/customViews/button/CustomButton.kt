@@ -2,17 +2,13 @@ package com.nelalexxx.unscramlewordgame.ui.customViews.button
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getString
 import com.google.android.material.button.MaterialButton
 import com.nelalexxx.unscramlewordgame.R
 
 
-class CustomButton : MaterialButton, UpdateButton {
-
-//    private var savedText: Int = 0
-//    private var savedVisibility: Int = View.VISIBLE
+class CustomButton : MaterialButton, UpdateButtonText, UpdateButtonVisibility {
 
     constructor(context: Context)
             : super(context)
@@ -23,7 +19,6 @@ class CustomButton : MaterialButton, UpdateButton {
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int)
             : super(context, attrs, defStyleAttr)
 
-
     override fun update(text: Int) {
         this.text = getString(this.context, text)
         if (text == R.string.next)
@@ -33,17 +28,15 @@ class CustomButton : MaterialButton, UpdateButton {
 
     }
 
-    override fun update(visibility: Boolean) {
-        this.visibility = if (visibility)
-            View.VISIBLE
-        else
-            View.INVISIBLE
+    override fun updateVisibility(visibility: Int) {
+        this.visibility = visibility
     }
-
 }
 
-interface UpdateButton {
+interface UpdateButtonText {
     fun update(text: Int)
-    fun update(visibility: Boolean)
+}
 
+interface UpdateButtonVisibility {
+    fun updateVisibility(visibility: Int)
 }

@@ -1,12 +1,13 @@
 package com.nelalexxx.unscramlewordgame.data.viewmodels
 
 import androidx.lifecycle.ViewModel
-import com.nelalexxx.unscramlewordgame.data.repositories.GameRepository
+import com.nelalexxx.unscramlewordgame.data.repositories.GameRepositoryImpl
+import com.nelalexxx.unscramlewordgame.ui.fragments.game.GameUiState
 
-class GameViewModel(private val repository: GameRepository) : ViewModel() {
+class GameViewModel(private val repository: GameRepositoryImpl) : ViewModel() {
 
-    lateinit var uiState: GameUiState
-    fun getCorrectAnswers() = repository.correctAnswers
+
+    fun getCorrectAnswers() = repository.getCorrectAnswers()
 
     fun check(text: String): GameUiState = if (repository.same(text))
         GameUiState.CorrectWord
@@ -19,9 +20,8 @@ class GameViewModel(private val repository: GameRepository) : ViewModel() {
     } else
         GameUiState.Empty
 
-    fun init() {
-        val data = repository.shuffledWord()
-        uiState = GameUiState.ScrambleWordReceived(data)
+    fun init(): String {
+        return repository.shuffledWord()
     }
 
     fun editInputField(text: String): GameUiState = if (text == "")
