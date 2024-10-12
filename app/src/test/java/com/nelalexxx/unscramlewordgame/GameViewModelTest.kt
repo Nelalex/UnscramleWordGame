@@ -1,8 +1,8 @@
 package com.nelalexxx.unscramlewordgame
 
 import com.nelalexxx.unscramlewordgame.data.repositories.GameRepository
-import com.nelalexxx.unscramlewordgame.data.viewmodels.GameUiState
 import com.nelalexxx.unscramlewordgame.data.viewmodels.GameViewModel
+import com.nelalexxx.unscramlewordgame.ui.fragments.game.GameUiState
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test

@@ -3,7 +3,8 @@ package com.nelalexxx.unscramlewordgame.ui.customViews.word
 import android.content.Context
 import android.util.AttributeSet
 
-class WordTextView : androidx.appcompat.widget.AppCompatTextView, UpdateText {
+class WordTextView : androidx.appcompat.widget.AppCompatTextView, UpdateTextViewText,
+    UpdateTextViewVisibility {
 
     constructor(context: Context)
             : super(context)
@@ -18,9 +19,15 @@ class WordTextView : androidx.appcompat.widget.AppCompatTextView, UpdateText {
         this.text = text
     }
 
-
+    override fun update(visibility: Int) {
+        this.visibility = visibility
+    }
 }
 
-interface UpdateText {
+interface UpdateTextViewText {
     fun update(text: String)
+}
+
+interface UpdateTextViewVisibility {
+    fun update(visibility: Int)
 }

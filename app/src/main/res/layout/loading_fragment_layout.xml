@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#6D92A1">
 
-    <ProgressBar
+    <com.nelalexxx.unscramlewordgame.ui.customViews.progressBar.CustomProgressBar
         android:id="@+id/loadProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,19 +19,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="272dp"
-        android:text="Retry"
+        android:text="@string/retry"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+    <com.nelalexxx.unscramlewordgame.ui.customViews.word.WordTextView
         android:id="@+id/warningTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="356dp"
-        android:text="No internet connection! Please, turn on wifi!"
+        android:text="@string/no_internet_notification"
         android:textColor="#8A3F3F"
         android:textStyle="bold"
         android:visibility="invisible"

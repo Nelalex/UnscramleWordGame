@@ -7,5 +7,4 @@ interface WordsListApi {
 
     @GET("/api?words=10")
     suspend fun getWordsList(): Response<List<String>>
-
 }
