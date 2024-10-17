@@ -14,9 +14,11 @@ import com.nelalexxx.unscramlewordgame.data.viewmodels.GameViewModel
 import com.nelalexxx.unscramlewordgame.databinding.LoadingFragmentLayoutBinding
 import com.nelalexxx.unscramlewordgame.retrofit.RetrofitInstance
 import com.nelalexxx.unscramlewordgame.ui.fragments.BindingFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class LoadingFragment : BindingFragment<LoadingFragmentLayoutBinding>() {
     override val bindingInflater: (LayoutInflater) -> ViewBinding
         get() = LoadingFragmentLayoutBinding::inflate
