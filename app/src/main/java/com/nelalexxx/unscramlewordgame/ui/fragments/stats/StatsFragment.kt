@@ -12,6 +12,7 @@ import com.nelalexxx.unscramlewordgame.data.viewmodels.GameViewModel
 import com.nelalexxx.unscramlewordgame.databinding.StatsFragmentLayoutBinding
 import com.nelalexxx.unscramlewordgame.ui.fragments.BindingFragment
 
+
 class StatsFragment : BindingFragment<StatsFragmentLayoutBinding>() {
     override val bindingInflater: (LayoutInflater) -> ViewBinding
         get() = StatsFragmentLayoutBinding::inflate

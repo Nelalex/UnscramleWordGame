@@ -1,11 +1,16 @@
 package com.nelalexxx.unscramlewordgame.data.viewmodels
 
 import androidx.lifecycle.ViewModel
-import com.nelalexxx.unscramlewordgame.data.repositories.GameRepositoryImpl
+import com.nelalexxx.unscramlewordgame.data.repositories.GameRepository
 import com.nelalexxx.unscramlewordgame.ui.fragments.game.GameUiState
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class GameViewModel(private val repository: GameRepositoryImpl) : ViewModel() {
 
+@HiltViewModel
+class GameViewModel @Inject constructor(
+    private val repository: GameRepository
+) : ViewModel() {
 
     fun getCorrectAnswers() = repository.getCorrectAnswers()
 
@@ -29,10 +34,6 @@ class GameViewModel(private val repository: GameRepositoryImpl) : ViewModel() {
     else
         GameUiState.TextEdited()
 
-    fun nextWord(): GameUiState {
-        val data = repository.shuffledWord()
-        return GameUiState.ScrambleWordReceived(data)
-    }
 
     fun setWordListFromApi(wordList: List<String>) {
         repository.setWordListFromApi(wordList)

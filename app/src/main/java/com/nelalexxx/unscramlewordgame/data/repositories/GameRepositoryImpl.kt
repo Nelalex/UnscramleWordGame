@@ -1,6 +1,8 @@
 package com.nelalexxx.unscramlewordgame.data.repositories
 
-class GameRepositoryImpl : GameRepository {
+import javax.inject.Inject
+
+class GameRepositoryImpl @Inject constructor() : GameRepository {
 
     private var gameData = GameData()
 

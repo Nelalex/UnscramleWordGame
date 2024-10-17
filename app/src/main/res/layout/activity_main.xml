@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rootLayout"
@@ -9,23 +9,30 @@
     tools:context=".ui.activities.MainActivity">
 
  <TextView
+     android:id="@+id/textView"
      android:layout_width="match_parent"
      android:layout_height="80dp"
      android:background="#E0EBF1"
      android:gravity="center"
      android:padding="20dp"
-     android:text="Unscramble word game"
-     android:textSize="24dp"
-     android:textStyle="bold" />
+     android:text="@string/myAppTitle"
+     android:textSize="24sp"
+     android:textStyle="bold"
+     app:layout_constraintBottom_toBottomOf="parent"
+     app:layout_constraintTop_toTopOf="parent"
+     app:layout_constraintVertical_bias="0.0"
+     tools:layout_editor_absoluteX="71dp" />
 
  <androidx.fragment.app.FragmentContainerView
      android:id="@+id/main_nav_host_fragment"
      android:name="androidx.navigation.fragment.NavHostFragment"
      android:layout_width="match_parent"
-     android:layout_height="match_parent"
+     android:layout_height="0dp"
+     android:layout_weight="1"
      app:defaultNavHost="true"
+     app:layout_constraintBottom_toBottomOf="parent"
+     app:layout_constraintTop_toBottomOf="@+id/textView"
      app:navGraph="@navigation/main_nav_grph" />
 
 
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
