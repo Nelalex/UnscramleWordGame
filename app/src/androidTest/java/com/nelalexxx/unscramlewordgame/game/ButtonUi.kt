@@ -20,7 +20,6 @@ import org.hamcrest.Matcher
 class ButtonUi(
     id: Int,
     textResId: Int,
-    color: Int,
     containerIdMatcher: Matcher<View>,
     containerClassTypeMatcher: Matcher<View>
 ) : AbstractButton(

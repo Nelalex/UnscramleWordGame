@@ -5,8 +5,8 @@ package com.nelalexxx.unscramlewordgame
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-class GameViewModelTest {
-
+//class GameViewModelTest {
+//
 //    private lateinit var viewModel: GameViewModel
 //
 //    @Before
@@ -45,7 +45,7 @@ class GameViewModelTest {
         )
         )
         assertEquals(expected, actual)
-    */
+
 
 //
 //    @Test
@@ -148,33 +148,51 @@ class GameViewModelTest {
 //    }
 //}
 //
+// */
+//    private class FakeRepository : GameRepository {
 //
-//private class FakeRepository : GameRepository {
-//
-//    private val originalList = listOf(
-//        "123",
-//        "345",
-//        "789",
-//        "024"
+//        private var gameData = GameData()
+//    var fakeWordList: MutableList<String> = mutableListOf(
+//        "hello",
+//        "spam",
+//        "report",
+//        "stop",
+//        "troll"
 //    )
-//    private val shuffledList = originalList.map { it.reversed() }
 //
+//        override fun setWordListFromApi(uploadedWordList: List<String>) {
+//            gameData.originalList = fakeWordList
+//        }
 //
-//    private var index = 0
-//    override fun shuffledWord(): String = shuffledList[index]
-//    override fun same(): Boolean {
-//        return false
+//        override fun same(text: String): Boolean {
+//            return if (gameData.originalList[gameData.index].equals(text, true)) {
+//                gameData.correctAnswers++
+//                true
+//            } else
+//                false
+//        }
+//
+//        override fun next(): Boolean {
+//            gameData.index++
+//            return if (gameData.index == gameData.originalList.size) {
+//                gameData.index = 0
+//                false
+//            } else
+//                true
+//        }
+//
+//        override fun getCorrectAnswers(): Int {
+//            return gameData.correctAnswers
+//        }
+//
+//        override fun shuffledWord(): String {
+//            if (gameData.index == 0) {
+//                gameData.correctAnswers = 0
+//            }
+//            return gameData.originalList[gameData.index].reversed()
+//        }
 //    }
-//
-//    fun same(userInput: String): Boolean =
-//        originalList[index].equals(userInput, true)
-//
-//    override fun next() {
-//        index++
-//        if (index == originalList.size)
-//            index = 0
-//    }
-}
+//}
 
 
 

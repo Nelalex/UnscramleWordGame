@@ -9,7 +9,7 @@ import com.nelalexxx.unscramlewordgame.R
 import org.hamcrest.Matcher
 
 class GamePage(word: String) {
-    private val containerIdMatcher: Matcher<View> = withParent(withId(R.id.rootLayout))
+    private val containerIdMatcher: Matcher<View> = withParent(withId(R.id.gameFragmentLayout))
     private val classTypeMatcher: Matcher<View> =
         withParent(isAssignableFrom(LinearLayout::class.java))
 
@@ -29,7 +29,6 @@ class GamePage(word: String) {
     private val checkButtonUi = ButtonUi(
         id = R.id.checkButton,
         textResId = R.string.checkButtonText,
-        color = R.color.checkButtonColor,
         containerIdMatcher = containerIdMatcher,
         containerClassTypeMatcher = classTypeMatcher
     )
@@ -37,7 +36,6 @@ class GamePage(word: String) {
     private val getNextWordButtonUi = ButtonUi(
         id = R.id.getNextWordButton,
         textResId = R.string.skip, // skip - next
-        color = R.color.skipButtonColor,
         containerIdMatcher = containerIdMatcher,
         containerClassTypeMatcher = classTypeMatcher
     )

@@ -23,7 +23,7 @@ class GameFragment : BindingFragment<GameFragmentLayoutBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        uiState = GameUiState.ScrambleWordReceived(viewModel.init())
+        uiState = viewModel.init()
         updateUI()
 
         binding.checkButton.setOnClickListener {

@@ -4,8 +4,9 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.core.content.ContextCompat.getString
 import com.google.android.material.textfield.TextInputLayout
+import com.nelalexxx.unscramlewordgame.ui.customViews.UpdateViews
 
-class CustomTextInputLayout : TextInputLayout, UpdateTextInputHintText {
+class CustomTextInputLayout : TextInputLayout, UpdateMyTextInputLayout {
 
     constructor(context: Context)
             : super(context)
@@ -16,11 +17,9 @@ class CustomTextInputLayout : TextInputLayout, UpdateTextInputHintText {
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int)
             : super(context, attrs, defStyleAttr)
 
-    override fun updateHintText(hintText: Int) {
-        this.hint = getString(this.context, hintText)
+    override fun updateText(text: Int) {
+        this.hint = getString(this.context, text)
     }
 }
 
-interface UpdateTextInputHintText {
-    fun updateHintText(hintText: Int)
-}
+interface UpdateMyTextInputLayout : UpdateViews.TextFromResources
