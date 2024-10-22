@@ -12,7 +12,6 @@ import androidx.viewbinding.ViewBinding
 import com.nelalexxx.unscramlewordgame.R
 import com.nelalexxx.unscramlewordgame.data.viewmodels.GameViewModel
 import com.nelalexxx.unscramlewordgame.databinding.LoadingFragmentLayoutBinding
-import com.nelalexxx.unscramlewordgame.retrofit.RetrofitInstance
 import com.nelalexxx.unscramlewordgame.ui.fragments.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -28,13 +27,50 @@ class LoadingFragment : BindingFragment<LoadingFragmentLayoutBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tryGetData()
+        uiState = LoadingUiState.AttemptToConnect
+        updateUI()
+
+        lifecycleScope.launch {
+            uiState = viewModel.tryGetData()
+            delay(1000)
+
+            if (uiState == LoadingUiState.Success) {
+                findNavController().navigate(
+                    R.id.gameFragment,
+                    null, NavOptions.Builder()
+                        .setPopUpTo(R.id.loadingFragment, true)
+                        .build()
+                )
+            }
+            updateUI()
+        }
+
         binding.retryConnectBtn.setOnClickListener {
+
             uiState = LoadingUiState.AttemptToConnect
             updateUI()
-            tryGetData()
+            Log.d("LoadingFragment", "AttemptToConnect")
+
+            lifecycleScope.launch {
+                uiState = viewModel.tryGetData()
+                delay(1000L)
+
+                if (uiState == LoadingUiState.Success) {
+                    findNavController().navigate(
+                        R.id.gameFragment,
+                        null,
+                        NavOptions.Builder()
+                            .setPopUpTo(R.id.loadingFragment, true)
+                            .build()
+                    )
+                }
+                Log.d("LoadingFragment", "ConnectionError")
+                updateUI()
+            }
+
         }
     }
+
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
@@ -48,40 +84,6 @@ class LoadingFragment : BindingFragment<LoadingFragmentLayoutBinding>() {
         updateUI()
     }
 
-    private fun tryGetData() {
-        lifecycleScope.launch {
-            var wordsList: List<String>? = null
-            while (wordsList == null) {
-                try {
-                    val response = RetrofitInstance().api.getWordsList()
-                    if (response.isSuccessful) {
-                        wordsList = response.body()
-                        viewModel.setWordListFromApi(wordsList!!)
-                        findNavController().navigate(
-                            R.id.gameFragment,
-                            null,
-                            NavOptions.Builder()
-                                .setPopUpTo(R.id.loadingFragment, true)
-                                .build()
-                        )
-                    } else {
-                        Log.d("LoadingFragment", "API error: ${response.code()}")
-                        showError()
-                    }
-                } catch (e: Exception) {
-                    Log.d("LoadingFragment", "Network error: ${e.message}")
-                    showError()
-                }
-            }
-        }
-    }
-
-    private suspend fun showError() {
-        delay(2000)
-        uiState = LoadingUiState.ConnectionError
-        updateUI()
-    }
-
     private fun updateUI() {
         uiState.update(
             binding.warningTV,
@@ -89,5 +91,7 @@ class LoadingFragment : BindingFragment<LoadingFragmentLayoutBinding>() {
             binding.retryConnectBtn
         )
     }
+
 }
+
 

@@ -3,8 +3,9 @@ package com.nelalexxx.unscramlewordgame.ui.customViews.editText
 import android.content.Context
 import android.util.AttributeSet
 import com.google.android.material.textfield.TextInputEditText
+import com.nelalexxx.unscramlewordgame.ui.customViews.UpdateViews
 
-class CustomEditText : TextInputEditText, UpdateEditTextAvailability, ClearEditText {
+class CustomEditText : TextInputEditText, UpdateMyEditText {
 
     constructor(context: Context)
             : super(context)
@@ -15,22 +16,15 @@ class CustomEditText : TextInputEditText, UpdateEditTextAvailability, ClearEditT
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int)
             : super(context, attrs, defStyleAttr)
 
-    override fun update(enabled: Boolean) {
-        this.isEnabled = enabled
-    }
-
     override fun clear() {
         this.setText("")
     }
 
+    override fun updateEnabled(enabled: Boolean) {
+        this.isEnabled = enabled
+    }
 }
 
-interface UpdateEditTextAvailability {
-    fun update(enabled: Boolean)
-}
-
-interface ClearEditText {
-    fun clear()
-}
+interface UpdateMyEditText : UpdateViews.ClearText, UpdateViews.TextEnabled
 
 

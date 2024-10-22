@@ -3,8 +3,9 @@ package com.nelalexxx.unscramlewordgame.ui.customViews.progressBar
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.ProgressBar
+import com.nelalexxx.unscramlewordgame.ui.customViews.UpdateViews
 
-class CustomProgressBar : ProgressBar, UpdateProgressBarVisibility {
+class CustomProgressBar : ProgressBar, UpdateMyProgressBar {
 
     constructor(context: Context)
             : super(context)
@@ -15,11 +16,9 @@ class CustomProgressBar : ProgressBar, UpdateProgressBarVisibility {
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int)
             : super(context, attrs, defStyleAttr)
 
-    override fun update(visibility: Int) {
+    override fun updateVisibility(visibility: Int) {
         this.visibility = visibility
     }
 }
 
-interface UpdateProgressBarVisibility {
-    fun update(visibility: Int)
-}
+interface UpdateMyProgressBar : UpdateViews.Visibility

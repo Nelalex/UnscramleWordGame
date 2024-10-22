@@ -3,20 +3,21 @@ package com.nelalexxx.unscramlewordgame.ui.fragments.game
 import android.view.View
 import android.view.animation.AnimationUtils
 import com.nelalexxx.unscramlewordgame.R
-import com.nelalexxx.unscramlewordgame.ui.customViews.button.CustomButton
+import com.nelalexxx.unscramlewordgame.ui.customViews.button.UpdateMyButton
 import com.nelalexxx.unscramlewordgame.ui.customViews.editText.CustomEditText
-import com.nelalexxx.unscramlewordgame.ui.customViews.editText.CustomTextInputLayout
-import com.nelalexxx.unscramlewordgame.ui.customViews.word.UpdateTextViewText
+import com.nelalexxx.unscramlewordgame.ui.customViews.editText.UpdateMyTextInputLayout
+import com.nelalexxx.unscramlewordgame.ui.customViews.word.UpdateMyTextView
+
 import java.io.Serializable
 
 interface GameUiState : Serializable {
 
     fun update(
-        wordTextView: UpdateTextViewText,
+        wordTextView: UpdateMyTextView,
         editText: CustomEditText,
-        inputFieldLayout: CustomTextInputLayout,
-        checkButton: CustomButton,
-        nextButton: CustomButton
+        inputFieldLayout: UpdateMyTextInputLayout,
+        checkButton: UpdateMyButton,
+        nextButton: UpdateMyButton
     ) = Unit
 
     object Empty : GameUiState
@@ -25,66 +26,66 @@ interface GameUiState : Serializable {
         val text: String
     ) : GameUiState {
         override fun update(
-            wordTextView: UpdateTextViewText,
+            wordTextView: UpdateMyTextView,
             editText: CustomEditText,
-            inputFieldLayout: CustomTextInputLayout,
-            checkButton: CustomButton,
-            nextButton: CustomButton
+            inputFieldLayout: UpdateMyTextInputLayout,
+            checkButton: UpdateMyButton,
+            nextButton: UpdateMyButton
         ) {
-            wordTextView.update(text = text)
+            wordTextView.updateText(text = text)
             editText.clear()
-            editText.update(enabled = true)
-            inputFieldLayout.updateHintText(hintText = R.string.hint)
+            editText.updateEnabled(enabled = true)
+            inputFieldLayout.updateText(text = R.string.hint)
             checkButton.updateVisibility(visibility = View.INVISIBLE)
-            nextButton.update(text = R.string.skip)
+            nextButton.updateColor(text = R.string.skip)
         }
     }
 
     data class TextEdited(private val flag: Int = 1) : GameUiState {
         override fun update(
-            wordTextView: UpdateTextViewText,
+            wordTextView: UpdateMyTextView,
             editText: CustomEditText,
-            inputFieldLayout: CustomTextInputLayout,
-            checkButton: CustomButton,
-            nextButton: CustomButton
+            inputFieldLayout: UpdateMyTextInputLayout,
+            checkButton: UpdateMyButton,
+            nextButton: UpdateMyButton
         ) {
             if (flag == -1) {
                 checkButton.updateVisibility(visibility = View.INVISIBLE)
             } else
                 checkButton.updateVisibility(visibility = View.VISIBLE)
-            nextButton.update(text = R.string.skip)
-            editText.update(enabled = true)
-            inputFieldLayout.updateHintText(hintText = R.string.hint)
+            nextButton.updateColor(text = R.string.skip)
+            editText.updateEnabled(enabled = true)
+            inputFieldLayout.updateText(text = R.string.hint)
         }
     }
 
     object CorrectWord : GameUiState {
         override fun update(
-            wordTextView: UpdateTextViewText,
+            wordTextView: UpdateMyTextView,
             editText: CustomEditText,
-            inputFieldLayout: CustomTextInputLayout,
-            checkButton: CustomButton,
-            nextButton: CustomButton
+            inputFieldLayout: UpdateMyTextInputLayout,
+            checkButton: UpdateMyButton,
+            nextButton: UpdateMyButton
         ) {
             checkButton.updateVisibility(visibility = View.INVISIBLE)
-            nextButton.update(text = R.string.next)
-            editText.update(enabled = false)
-            inputFieldLayout.updateHintText(hintText = R.string.correct)
+            nextButton.updateColor(text = R.string.next)
+            editText.updateEnabled(enabled = false)
+            inputFieldLayout.updateText(text = R.string.correct)
         }
     }
 
     object InCorrectWord :
         GameUiState {
         override fun update(
-            wordTextView: UpdateTextViewText,
+            wordTextView: UpdateMyTextView,
             editText: CustomEditText,
-            inputFieldLayout: CustomTextInputLayout,
-            checkButton: CustomButton,
-            nextButton: CustomButton
+            inputFieldLayout: UpdateMyTextInputLayout,
+            checkButton: UpdateMyButton,
+            nextButton: UpdateMyButton
         ) {
             checkButton.updateVisibility(visibility = View.VISIBLE)
-            editText.update(enabled = true)
-            inputFieldLayout.updateHintText(hintText = R.string.incorrect)
+            editText.updateEnabled(enabled = true)
+            inputFieldLayout.updateText(text = R.string.incorrect)
 
             val shakeAnimation = AnimationUtils.loadAnimation(editText.context, R.anim.shake)
             editText.startAnimation(shakeAnimation)

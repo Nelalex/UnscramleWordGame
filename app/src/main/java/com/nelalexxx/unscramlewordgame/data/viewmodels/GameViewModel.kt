@@ -1,9 +1,13 @@
 package com.nelalexxx.unscramlewordgame.data.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.nelalexxx.unscramlewordgame.data.repositories.GameRepository
+import com.nelalexxx.unscramlewordgame.retrofit.RetrofitInstance
 import com.nelalexxx.unscramlewordgame.ui.fragments.game.GameUiState
+import com.nelalexxx.unscramlewordgame.ui.fragments.loading.LoadingUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.withTimeoutOrNull
 import javax.inject.Inject
 
 
@@ -25,8 +29,9 @@ class GameViewModel @Inject constructor(
     } else
         GameUiState.Empty
 
-    fun init(): String {
-        return repository.shuffledWord()
+    fun init(): GameUiState {
+        val data = repository.shuffledWord()
+        return GameUiState.ScrambleWordReceived(data)
     }
 
     fun editInputField(text: String): GameUiState = if (text == "")
@@ -34,8 +39,29 @@ class GameViewModel @Inject constructor(
     else
         GameUiState.TextEdited()
 
-
-    fun setWordListFromApi(wordList: List<String>) {
+    // LoadingFragment
+    private fun setWordListFromApi(wordList: List<String>) {
         repository.setWordListFromApi(wordList)
     }
+
+
+    suspend fun tryGetData(): LoadingUiState {
+        return withTimeoutOrNull(2000) { // Ожидание 2 секунды
+            try {
+                val response = RetrofitInstance().api.getWordsList()
+                if (response.isSuccessful) {
+                    setWordListFromApi(response.body()!!)
+                    LoadingUiState.Success
+                } else {
+                    Log.d("LoadingFragment", "API error: ${response.code()}")
+                    LoadingUiState.ConnectionError
+                }
+            } catch (e: Exception) {
+                Log.d("LoadingFragment", "Network error: ${e.message}")
+                LoadingUiState.ConnectionError
+            }
+        } ?: LoadingUiState.ConnectionError // Если время ожидания истекло
+    }
+
+
 }

@@ -6,9 +6,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getString
 import com.google.android.material.button.MaterialButton
 import com.nelalexxx.unscramlewordgame.R
+import com.nelalexxx.unscramlewordgame.ui.customViews.UpdateViews
 
 
-class CustomButton : MaterialButton, UpdateButtonText, UpdateButtonVisibility {
+class CustomButton : MaterialButton, UpdateMyButton {
 
     constructor(context: Context)
             : super(context)
@@ -19,13 +20,12 @@ class CustomButton : MaterialButton, UpdateButtonText, UpdateButtonVisibility {
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int)
             : super(context, attrs, defStyleAttr)
 
-    override fun update(text: Int) {
+    override fun updateColor(text: Int) {
         this.text = getString(this.context, text)
         if (text == R.string.next)
             this.setBackgroundColor(ContextCompat.getColor(this.context, R.color.Correct))
         else
             this.setBackgroundColor(ContextCompat.getColor(this.context, R.color.Incorrect))
-
     }
 
     override fun updateVisibility(visibility: Int) {
@@ -33,10 +33,4 @@ class CustomButton : MaterialButton, UpdateButtonText, UpdateButtonVisibility {
     }
 }
 
-interface UpdateButtonText {
-    fun update(text: Int)
-}
-
-interface UpdateButtonVisibility {
-    fun updateVisibility(visibility: Int)
-}
+interface UpdateMyButton : UpdateViews.Color, UpdateViews.Visibility
