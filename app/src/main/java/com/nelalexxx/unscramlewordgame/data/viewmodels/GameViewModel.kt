@@ -63,5 +63,8 @@ class GameViewModel @Inject constructor(
         } ?: LoadingUiState.ConnectionError // Если время ожидания истекло
     }
 
-
+    // offline
+//      fun tryGetData(): LoadingUiState {
+//        return LoadingUiState.Success
+//    }
 }

@@ -26,7 +26,7 @@ class ScenarioTest {
 //    "troll"
     @Before
     fun setup() {
-        gamePage = GamePage(word = "hello".reversed()) // education
+        gamePage = GamePage(word = "hello") // education
     }
 
     /** UGTC-01
@@ -34,7 +34,6 @@ class ScenarioTest {
      */
     @Test
     fun caseNumber1() {
-
 
         activityScenarioRule.doWithRecreate(gamePage::assertScrambleWordReceivedState)
 
@@ -45,7 +44,7 @@ class ScenarioTest {
         activityScenarioRule.doWithRecreate(gamePage::assertCorrectWordState)
 
         gamePage.clickGetNextWordButton()
-        gamePage = GamePage(word = "spam".reversed() /*example*/)
+        gamePage = GamePage(word = "spam" /*example*/)
         activityScenarioRule.doWithRecreate(gamePage::assertScrambleWordReceivedState)
 
         repeat(4) {
@@ -60,65 +59,6 @@ class ScenarioTest {
         activityScenarioRule.doWithRecreate(gamePage::assertScrambleWordReceivedState)
     }
 
-
-//    fun caseNumber2() {
-//        gamePage.assertScrambleWordReceivedState()
-//
-//        gamePage.editInputField(text = "d")
-//        gamePage.assertInputFieldEditedState()
-//
-//        gamePage.editInputField(text = "e")
-//        gamePage.assertInputFieldEditedState()
-//
-//        gamePage.editInputField(text = "")
-//        gamePage.assertScrambleWordReceivedState()
-//
-//        gamePage.editInputField(text = "spam".reversed())
-//        gamePage.assertInputFieldEditedState()
-//
-//        gamePage.clickCheck()
-//        gamePage.assertInCorrectWordState()
-//
-//        gamePage.editInputField(text = "report".reversed())
-//        gamePage.assertInputFieldEditedState()
-//
-//        gamePage.clickCheck()
-//        gamePage.assertCorrectWordState()
-//
-//        gamePage.clickGetNextWordButton()
-//        gamePage = GamePage(word = "stop".reversed() /*example*/)
-//        gamePage.assertScrambleWordReceivedState()
-//    }
-//
-//    /** UGTC-03
-//     *
-//     */
-//    fun caseNumber3() {
-//        gamePage.assertScrambleWordReceivedState()
-//
-//        gamePage.clickGetNextWordButton()
-//        gamePage = GamePage(word = "etts" /*test*/)
-//        gamePage.assertScrambleWordReceivedState()
-//
-//        gamePage.editInputField(text = "ttes")
-//        gamePage.assertInputFieldEditedState()
-//
-//        gamePage.clickGetNextWordButton()
-//        gamePage = GamePage(word = "ricytov" /*victory*/)
-//        gamePage.assertScrambleWordReceivedState()
-//
-//        gamePage.editInputField(text = "vyctori")
-//        gamePage.assertInputFieldEditedState()
-//
-//        gamePage.clickCheck()
-//        gamePage.assertInCorrectWordState()
-//
-//        gamePage.clickGetNextWordButton()
-//        gamePage = GamePage(word = "den" /*end*/)
-//        gamePage.assertScrambleWordReceivedState()
-//    }
-
-
     // Чтобы обновлять экран после каждого теста
     private fun ActivityScenarioRule<*>.doWithRecreate(block: () -> Unit) {
         block.invoke()
@@ -126,5 +66,52 @@ class ScenarioTest {
         block.invoke()
     }
 
-
+//    private class FakeRepository : GameRepository {
+//
+//        private var gameData = GameData()
+//
+//        init {
+//            var fakeWordList: MutableList<String> = mutableListOf(
+//                "hello",
+//                "spam",
+//                "report",
+//                "stop",
+//                "troll"
+//            )
+//            gameData.originalList = fakeWordList
+//        }
+//
+//
+//        override fun setWordListFromApi(uploadedWordList: List<String>) {
+//            gameData.originalList = uploadedWordList.toMutableList()
+//        }
+//
+//        override fun same(text: String): Boolean {
+//            return if (gameData.originalList[gameData.index].equals(text, true)) {
+//                gameData.correctAnswers++
+//                true
+//            } else
+//                false
+//        }
+//
+//        override fun next(): Boolean {
+//            gameData.index++
+//            return if (gameData.index == gameData.originalList.size) {
+//                gameData.index = 0
+//                false
+//            } else
+//                true
+//        }
+//
+//        override fun getCorrectAnswers(): Int {
+//            return gameData.correctAnswers
+//        }
+//
+//        override fun shuffledWord(): String {
+//            if (gameData.index == 0) {
+//                gameData.correctAnswers = 0
+//            }
+//            return gameData.originalList[gameData.index].reversed()
+//        }
+//    }
 }

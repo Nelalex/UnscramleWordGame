@@ -64,6 +64,8 @@ dependencies {
 
     // Room
     implementation(libs.androidx.room.runtime)
+    androidTestImplementation(project(":app"))
+    androidTestImplementation(project(":app"))
     kapt(libs.androidx.room.compiler)
 
     // Kotlin Extensions and Coroutines support for Room
@@ -92,4 +94,7 @@ dependencies {
     //Dagger-Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
+
+    //
+    testImplementation(libs.mockk)
 }

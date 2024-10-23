@@ -19,5 +19,4 @@ class ButtonColorMatcher(private val color: Int) :
     override fun matchesSafely(item: Button?): Boolean {
         return (item?.background as ColorDrawable).color == color
     }
-
 }

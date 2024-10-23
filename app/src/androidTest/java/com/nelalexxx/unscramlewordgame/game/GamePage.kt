@@ -4,14 +4,13 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withParent
 import com.nelalexxx.unscramlewordgame.R
 import org.hamcrest.Matcher
 
 class GamePage(word: String) {
-    private val containerIdMatcher: Matcher<View> = withParent(withId(R.id.gameFragmentLayout))
-    private val classTypeMatcher: Matcher<View> =
-        withParent(isAssignableFrom(LinearLayout::class.java))
+
+    private val containerIdMatcher: Matcher<View> = withId(R.id.gameFragmentLayout)
+    private val classTypeMatcher: Matcher<View> = isAssignableFrom(LinearLayout::class.java)
 
     private val wordUi = WordUi(
         text = word,
@@ -19,12 +18,10 @@ class GamePage(word: String) {
         containerClassTypeMatcher = classTypeMatcher
     )
 
-
     private val inputField = InputField(
         id = R.id.inputFieldLayout,
             containerIdMatcher = containerIdMatcher,
         )
-
 
     private val checkButtonUi = ButtonUi(
         id = R.id.checkButton,
@@ -53,7 +50,6 @@ class GamePage(word: String) {
         getNextWordButtonUi.click()
     }
 
-
     fun assertScrambleWordReceivedState() {
         wordUi.assertTextVisible()
         inputField.assertScrambleWordReceivedState()
@@ -61,8 +57,6 @@ class GamePage(word: String) {
         // checkButtonUi.assertDisabledState()
         getNextWordButtonUi.assertScrambleWordReceivedState()
     }
-
-
 
     fun assertInputFieldEditedState() {
         wordUi.assertTextVisible()
@@ -72,16 +66,12 @@ class GamePage(word: String) {
         getNextWordButtonUi.assertInputFieldEditedState()
     }
 
-
-
     fun assertCorrectWordState() {
         wordUi.assertTextVisible()
         inputField.assertCorrectWordState()
         checkButtonUi.assertInvisibleState()
         getNextWordButtonUi.assertCorrectWordState()
     }
-
-
 
     fun assertInCorrectWordState() {
         wordUi.assertTextVisible()
@@ -90,5 +80,4 @@ class GamePage(word: String) {
         //  checkButtonUi.assertDisabledState()
         getNextWordButtonUi.assertInCorrectWordState()
     }
-
 }
