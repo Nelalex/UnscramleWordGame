@@ -3,6 +3,7 @@ package com.nelalexxx.unscramlewordgame
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nelalexxx.unscramlewordgame.game.GamePage
+import com.nelalexxx.unscramlewordgame.loading.LoadingPage
 import com.nelalexxx.unscramlewordgame.stats.StatsPage
 import com.nelalexxx.unscramlewordgame.ui.activities.MainActivity
 import org.junit.Before
@@ -18,6 +19,7 @@ class ScenarioTest {
     val activityScenarioRule = ActivityScenarioRule(MainActivity::class.java) // Какой активити запускать
 
     private  lateinit var gamePage: GamePage
+    private lateinit var loadPage: LoadingPage
 
     //    "hello",
 //    "spam",
@@ -26,12 +28,11 @@ class ScenarioTest {
 //    "troll"
     @Before
     fun setup() {
-        gamePage = GamePage(word = "hello") // education
+        gamePage = GamePage(word = "hello".reversed()) // education
+        loadPage = LoadingPage()
     }
 
-    /** UGTC-01
-     *
-     */
+    // GamePage Test
     @Test
     fun caseNumber1() {
 
@@ -44,7 +45,7 @@ class ScenarioTest {
         activityScenarioRule.doWithRecreate(gamePage::assertCorrectWordState)
 
         gamePage.clickGetNextWordButton()
-        gamePage = GamePage(word = "spam" /*example*/)
+        gamePage = GamePage(word = "spam".reversed() /*example*/)
         activityScenarioRule.doWithRecreate(gamePage::assertScrambleWordReceivedState)
 
         repeat(4) {
@@ -58,6 +59,35 @@ class ScenarioTest {
         setup()
         activityScenarioRule.doWithRecreate(gamePage::assertScrambleWordReceivedState)
     }
+
+    // Loading Page tests
+    @Test
+    fun caseNumber2() {
+
+        loadPage.assertAttemptToConnectState()
+
+        loadPage.waitTillError()
+
+        activityScenarioRule.doWithRecreate {
+            loadPage.assertConnectionErrorState()
+        }
+
+        loadPage.retryConnectBtnClick()
+
+        activityScenarioRule.doWithRecreate {
+            loadPage.assertAttemptToConnectState()
+        }
+
+        loadPage.waitTillGone()
+
+        activityScenarioRule.doWithRecreate {
+            gamePage.assertScrambleWordReceivedState()
+        }
+
+    }
+
+
+
 
     // Чтобы обновлять экран после каждого теста
     private fun ActivityScenarioRule<*>.doWithRecreate(block: () -> Unit) {
