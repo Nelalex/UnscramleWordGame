@@ -68,7 +68,6 @@ class ButtonUi(
             .check(matches(withText(R.string.skip)))
     }
 
-
     fun assertInCorrectWordState() {
         interaction
             .check(matches(ButtonColorMatcher(R.color.checkButtonColor)))
@@ -83,7 +82,5 @@ abstract class AbstractButton(
     fun click() {
         interaction.perform(androidx.test.espresso.action.ViewActions.click())
     }
-
-
 }
 

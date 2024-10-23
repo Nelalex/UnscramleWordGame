@@ -74,7 +74,6 @@ class InputField(
         return stringHolder[0]
     }
 
-
     fun assertScrambleWordReceivedState() {
         layoutInteraction.check(matches(isEnabled()))
         inputInteraction.check(matches(withText("")))
@@ -91,5 +90,4 @@ class InputField(
     fun assertInCorrectWordState() {
         layoutInteraction.check(matches(isEnabled()))
     }
-
 }

@@ -1,4 +1,4 @@
-package com.nelalexxx.unscramlewordgame.game
+package com.nelalexxx.unscramlewordgame.loading
 
 import android.view.View
 import android.widget.TextView
@@ -8,13 +8,12 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.espresso.matcher.ViewMatchers.isCompletelyDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.nelalexxx.unscramlewordgame.R
 import org.hamcrest.CoreMatchers.allOf
+import org.hamcrest.CoreMatchers.not
 import org.hamcrest.Matcher
 
-class WordUi(
-    text: String,
+class ErrorTV(
     containerIdMatcher: Matcher<View>,
     containerClassTypeMatcher: Matcher<View>
 ) {
@@ -23,13 +22,16 @@ class WordUi(
         allOf(
             containerIdMatcher,
             containerClassTypeMatcher,
-            withId(R.id.wordTextView),
-            withText(text),
+            withId(R.id.warningTV),
             isAssignableFrom(TextView::class.java)
         )
     )
 
-    fun assertTextVisible() {
+    fun assertVisibleState() {
         interaction.check(matches(isCompletelyDisplayed()))
+    }
+
+    fun assertInvisibleState() {
+        interaction.check(matches(not(isCompletelyDisplayed())))
     }
 }

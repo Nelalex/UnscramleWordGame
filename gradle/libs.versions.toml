@@ -21,6 +21,7 @@ legacySupportV4 = "1.0.0"
 lifecycleLivedataKtx = "2.8.4"
 lifecycleViewmodelKtx = "2.8.4"
 fragmentKtx = "1.5.6"
+mockk = "1.13.5"
 navigationFragmentKtxVersion = "2.8.1"
 navigationUiKtxVersion = "2.8.1"
 retrofit = "2.9.0"
@@ -62,6 +63,7 @@ androidx-ui-desktop = { group = "androidx.compose.ui", name = "ui-desktop", vers
 androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
 androidx-fragment = { group = "androidx.fragment", name = "fragment", version.ref = "fragment" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 
 [plugins]

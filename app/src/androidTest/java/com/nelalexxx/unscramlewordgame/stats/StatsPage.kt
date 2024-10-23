@@ -11,7 +11,7 @@ import org.hamcrest.Matcher
 
 class StatsPage(correctAnswers: Int) {
 
-    private val containerIdMatcher: Matcher<View> = withParent(withId(R.id.statsLayout))
+    private val containerIdMatcher: Matcher<View> = withParent(withId(R.id.loadingLayout))
     private val classTypeMatcher: Matcher<View> =
         withParent(isAssignableFrom(LinearLayout::class.java))
 
