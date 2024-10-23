@@ -97,4 +97,6 @@ dependencies {
 
     //
     testImplementation(libs.mockk)
+    androidTestImplementation(libs.androidx.espresso.contrib)
+    androidTestImplementation(libs.androidx.espresso.contrib.v360alpha01)
 }

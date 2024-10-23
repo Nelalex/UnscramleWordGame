@@ -1,6 +1,7 @@
 [versions]
 agp = "8.5.1"
 androidxLifecycleViewmodelKtx = "2.8.6"
+espressoContrib = "3.6.0-alpha01"
 fragmentKtxVersion = "1.8.4"
 glide = "4.12.0"
 hiltAndroid = "2.51.1"
@@ -33,6 +34,8 @@ fragment = "1.8.4"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-espresso-contrib = { module = "androidx.test.espresso:espresso-contrib", version.ref = "espressoCore" }
+androidx-espresso-contrib-v360alpha01 = { module = "androidx.test.espresso:espresso-contrib", version.ref = "espressoContrib" }
 androidx-fragment-ktx-v184 = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtxVersion" }
 androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-navigation-fragment-ktx-v281 = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationFragmentKtxVersion" }

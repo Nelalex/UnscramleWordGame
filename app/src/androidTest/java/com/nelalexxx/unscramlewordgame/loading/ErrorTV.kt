@@ -7,8 +7,11 @@ import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.espresso.matcher.ViewMatchers.isCompletelyDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.isRoot
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import com.nelalexxx.unscramlewordgame.R
+import com.nelalexxx.unscramlewordgame.waitTillDisplayed
+import com.nelalexxx.unscramlewordgame.waitTillDoesntExist
 import org.hamcrest.CoreMatchers.allOf
 import org.hamcrest.CoreMatchers.not
 import org.hamcrest.Matcher
@@ -33,5 +36,15 @@ class ErrorTV(
 
     fun assertInvisibleState() {
         interaction.check(matches(not(isCompletelyDisplayed())))
+    }
+
+    fun waitTillVisible() {
+        onView(isRoot()).perform(waitTillDisplayed(R.id.warningTV, 5000))
+    }
+
+    fun waitTillISGone() {
+        onView(isRoot()).perform(
+            waitTillDoesntExist(R.id.warningTV, 5000)
+        )
     }
 }

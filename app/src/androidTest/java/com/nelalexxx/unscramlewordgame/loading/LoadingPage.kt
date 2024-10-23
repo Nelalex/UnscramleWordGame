@@ -11,7 +11,7 @@ import org.hamcrest.Matcher
 
 class LoadingPage {
 
-    private val containerIdMatcher: Matcher<View> = withParent(withId(R.id.statsLayout))
+    private val containerIdMatcher: Matcher<View> = withParent(withId(R.id.loadingLayout))
     private val classTypeMatcher: Matcher<View> =
         withParent(isAssignableFrom(ConstraintLayout::class.java))
 
@@ -47,6 +47,14 @@ class LoadingPage {
         retryConnectBtnUI.assertVisibleState()
         errorTVUI.assertVisibleState()
         loadProgressBarUI.assertInvisibleState()
+    }
+
+    fun waitTillError() {
+        errorTVUI.waitTillVisible()
+    }
+
+    fun waitTillGone() {
+        errorTVUI.waitTillISGone()
     }
 
 }
